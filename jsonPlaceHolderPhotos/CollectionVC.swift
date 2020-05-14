@@ -15,28 +15,64 @@ class CollectionVC: UICollectionViewController {
     @IBOutlet var myCollectionView: UICollectionView!
     
     var cells:[Cell] = [
-        Cell(id: "1", title: "1", image: "1"),
-        Cell(id: "2", title: "2", image: "2"),
-        Cell(id: "3", title: "3", image: "3"),
-        Cell(id: "4", title: "4", image: "4"),
-        Cell(id: "5", title: "5", image: "5"),
-        Cell(id: "6", title: "6", image: "6"),
-        Cell(id: "7", title: "7", image: "7"),
-        Cell(id: "8", title: "8", image: "8"),
-        Cell(id: "9", title: "9", image: "9"),
-        Cell(id: "10", title: "10", image: "10")
+        Cell(id: "1", albumID: "1", title: "1", thumbnailUrl: "1"),
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadList()
+        
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
         collectionView.register(CollectionViewCell.nib(), forCellWithReuseIdentifier: CollectionViewCell.identifier)
 
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+    }
+    
+    func loadList(){
+        let url = URL(string: "https://jsonplaceholder.typicode.com/photos")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if(error != nil){
+                print("發送失敗 ", error!.localizedDescription)
+            }
+            else{
+                print("發送成功")
+                let str = String(data: data!, encoding: .utf8)
+                print(str ?? "")
+                
+            }
+            
+        }
+        
+        task.resume()
+        
+        /*let url = "https://jsonplaceholder.typicode.com/photos"
+        AF.request(url).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print(json)
+
+                for value in json.arrayValue {
+                    let url = value.dictionaryValue["url"]!.stringValue
+                    let albumId = value.dictionaryValue["albumId"]!.stringValue
+                    let thumbnailUrl = value.dictionaryValue["thumbnailUrl"]!.stringValue
+                    let id = value.dictionaryValue["id"]!.stringValue
+                    let title = value.dictionaryValue["title"]!.stringValue
+
+                    // Add this album to array.
+                    let album = AlbumModel(id: id, albumId: albumId, title: title, thumbnailUrl: thumbnailUrl)
+                    albums.append(album)
+
+                }
+            case .failure(let error):
+                print(error)
+            }
+
+        }*/
     }
 
     // MARK: - Navigation
@@ -70,14 +106,8 @@ class CollectionVC: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
             CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-        
-        /*
-        cell.ImageView.image = UIImage(named: cells[indexPath.row].image)
-        cell.idLabel.text = cells[indexPath.row].id
-        cell.titleLabel.text = cells[indexPath.row].title
-        */
     
-        cell.setCell(image: cells[indexPath.row].image, id: cells[indexPath.row].id, title: cells[indexPath.row].title)
+        cell.setCell(image: cells[indexPath.row].thumbnailUrl, id: cells[indexPath.row].id, title: cells[indexPath.row].title)
         
         return cell
     }

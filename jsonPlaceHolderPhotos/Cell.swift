@@ -10,16 +10,18 @@ import Foundation
 
 class Cell {
     var id : String
+    var albumId: String
     var title : String
-    var image : String
+    var thumbnailUrl : String
     
-    init(id : String, title : String, image : String){
+    init(id : String, albumID: String, title : String, thumbnailUrl : String){
         self.id = id
+        self.albumId = albumID
         self.title = title
-        self.image = image
+        self.thumbnailUrl = thumbnailUrl
     }//初始化器
     
     convenience init(){
-        self.init(id: "", title: "", image: "")
+        self.init(id: "", albumID: "", title: "", thumbnailUrl: "")
     }
 }

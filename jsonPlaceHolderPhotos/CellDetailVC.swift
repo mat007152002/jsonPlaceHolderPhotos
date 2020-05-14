@@ -21,7 +21,7 @@ class CellDetailVC: UIViewController {
         
         DetailIdLabel.text = cell.id
         DetailTitleLabel.text = cell.title
-        DetailImageView.image = UIImage(named: cell.image)
+        DetailImageView.image = UIImage(named: cell.thumbnailUrl)
 
     }
     
