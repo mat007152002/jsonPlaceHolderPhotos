@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Photo : Decodable {
+struct Photo : Decodable { //用來儲存JSON資料的容器
     let id : Int
     let title : String
     let url : URL
