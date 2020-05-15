@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD76E5E2246E21CF00B95213 /* photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76E5E1246E21CF00B95213 /* photo.swift */; };
+		DD76E5E4246E287300B95213 /* photoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD76E5E3246E287300B95213 /* photoRequest.swift */; };
 		DD8482DB246D3CF600D379CF /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8482DA246D3CF600D379CF /* Cell.swift */; };
 		DDA76F15246D29BB00A0CCED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA76F14246D29BB00A0CCED /* AppDelegate.swift */; };
 		DDA76F17246D29BB00A0CCED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA76F16246D29BB00A0CCED /* SceneDelegate.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD76E5E1246E21CF00B95213 /* photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photo.swift; sourceTree = "<group>"; };
+		DD76E5E3246E287300B95213 /* photoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = photoRequest.swift; sourceTree = "<group>"; };
 		DD8482DA246D3CF600D379CF /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		DDA76F11246D29BB00A0CCED /* jsonPlaceHolderPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jsonPlaceHolderPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDA76F14246D29BB00A0CCED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				DDA76F2A246D2BF400A0CCED /* CollectionViewCell.swift */,
 				DDA76F2E246D325000A0CCED /* CellDetailVC.swift */,
 				DD8482DA246D3CF600D379CF /* Cell.swift */,
+				DD76E5E1246E21CF00B95213 /* photo.swift */,
+				DD76E5E3246E287300B95213 /* photoRequest.swift */,
 				DDA76F1D246D29BC00A0CCED /* Assets.xcassets */,
 				DDA76F22246D29BC00A0CCED /* Info.plist */,
 			);
@@ -154,9 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD76E5E2246E21CF00B95213 /* photo.swift in Sources */,
 				DDA76F2C246D2BF400A0CCED /* CollectionViewCell.swift in Sources */,
 				DDA76F19246D29BB00A0CCED /* ViewController.swift in Sources */,
 				DD8482DB246D3CF600D379CF /* Cell.swift in Sources */,
+				DD76E5E4246E287300B95213 /* photoRequest.swift in Sources */,
 				DDA76F15246D29BB00A0CCED /* AppDelegate.swift in Sources */,
 				DDA76F2F246D325000A0CCED /* CellDetailVC.swift in Sources */,
 				DDA76F29246D2A0800A0CCED /* CollectionVC.swift in Sources */,

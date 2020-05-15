@@ -13,15 +13,15 @@ class CellDetailVC: UIViewController {
     @IBOutlet var DetailIdLabel: UILabel!
     @IBOutlet var DetailTitleLabel: UILabel!
     
-    var cell = Cell()
+    //var cell = Cell2(from:)
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DetailIdLabel.text = cell.id
-        DetailTitleLabel.text = cell.title
-        DetailImageView.image = UIImage(named: cell.thumbnailUrl)
+//        DetailIdLabel.text = cell.id
+//        DetailTitleLabel.text = cell.title
+//        DetailImageView.image = UIImage(named: cell.thumbnailUrl)
 
     }
     

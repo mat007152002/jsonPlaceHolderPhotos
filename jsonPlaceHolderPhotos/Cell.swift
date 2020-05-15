@@ -8,6 +8,21 @@
 
 import Foundation
 
+
+struct Cell2 : Codable{
+    let id : Int
+    let title : String
+    let url : String
+    let thumbnailUrl : String
+    
+    init(id : Int, title : String, url : String, thumbnailUrl : String) {
+        self.id = id
+        self.title = title
+        self.thumbnailUrl = thumbnailUrl
+        self.url = url
+    }
+}
+
 class Cell {
     var id : String
     var albumId: String

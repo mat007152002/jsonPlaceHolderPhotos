@@ -14,9 +14,11 @@ class CollectionVC: UICollectionViewController {
     
     @IBOutlet var myCollectionView: UICollectionView!
     
-    var cells:[Cell] = [
-        Cell(id: "1", albumID: "1", title: "1", thumbnailUrl: "1"),
-    ]
+//    var cells:[Cell] = [
+//        Cell(id: "1", albumID: "1", title: "1", thumbnailUrl: "1"),
+//    ]
+    
+    var cells : [Cell2]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,45 +36,29 @@ class CollectionVC: UICollectionViewController {
         let url = URL(string: "https://jsonplaceholder.typicode.com/photos")
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if(error != nil){
                 print("發送失敗 ", error!.localizedDescription)
             }
             else{
                 print("發送成功")
-                let str = String(data: data!, encoding: .utf8)
-                print(str ?? "")
+                //let str = String(data: data!, encoding: .utf8)!
+//                print(str ?? "")
                 
+                do{
+                    self.cells = try? JSONDecoder().decode([Cell2].self, from: data!)
+                }
+                catch{
+                    print(error.localizedDescription)
+                }
+
             }
             
         }
         
         task.resume()
         
-        /*let url = "https://jsonplaceholder.typicode.com/photos"
-        AF.request(url).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-
-                for value in json.arrayValue {
-                    let url = value.dictionaryValue["url"]!.stringValue
-                    let albumId = value.dictionaryValue["albumId"]!.stringValue
-                    let thumbnailUrl = value.dictionaryValue["thumbnailUrl"]!.stringValue
-                    let id = value.dictionaryValue["id"]!.stringValue
-                    let title = value.dictionaryValue["title"]!.stringValue
-
-                    // Add this album to array.
-                    let album = AlbumModel(id: id, albumId: albumId, title: title, thumbnailUrl: thumbnailUrl)
-                    albums.append(album)
-
-                }
-            case .failure(let error):
-                print(error)
-            }
-
-        }*/
     }
 
     // MARK: - Navigation
@@ -99,7 +85,7 @@ class CollectionVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return cells.count
+        return cells!.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -107,7 +93,7 @@ class CollectionVC: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
             CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
     
-        cell.setCell(image: cells[indexPath.row].thumbnailUrl, id: cells[indexPath.row].id, title: cells[indexPath.row].title)
+        cell.setCell(thumbimage: cells[indexPath.row].thumbnailUrl, id: <#T##String#>, title: <#T##String#>)
         
         return cell
     }

@@ -20,8 +20,8 @@ class CollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setCell(image: String, id: String, title: String){
-        ImageView.image = UIImage(named: image)
+    func setCell(thumbimage: String, id: String, title: String){
+        ImageView.image = UIImage(named: thumbimage)
         idLabel.text = id
         titleLabel.text = title
     }
