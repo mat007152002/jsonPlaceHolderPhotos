@@ -8,29 +8,19 @@
 
 import UIKit
 
-//private let reuseIdentifier = "Cell"
-
 class CollectionVC: UICollectionViewController {
     
     @IBOutlet var myCollectionView: UICollectionView!
-    
-    var cells:[Cell] = [
-        Cell(id: "1", albumID: "1", title: "1", thumbnailUrl: "1"),
-    ]
     
     var myData = [Photo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadList()
-        
-
-
+        loadList()//對API發出Request
         // Register cell classes
-        collectionView.register(CollectionViewCell.nib(), forCellWithReuseIdentifier: CollectionViewCell.identifier)
-
-        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
-    }
+        collectionView.register(CollectionViewCell.nib(), forCellWithReuseIdentifier: CollectionViewCell.identifier)//CollectionView內建
+        
+          }
     
     func loadList(){
         let url = URL(string: "https://jsonplaceholder.typicode.com/photos")
@@ -42,34 +32,22 @@ class CollectionVC: UICollectionViewController {
             }
             else{
                 print("發送成功")
-                
                     do{
                         self.myData = try JSONDecoder().decode([Photo].self,from: data!)
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
+                            self.collectionView.collectionViewLayout = UICollectionViewFlowLayout() //更新collectionView
+                            
                         }
                     }
                     catch{
                         print(error.localizedDescription)
                     }
-                
-                
-                
-                
             }
-            
         }
-        
         task.resume()
         
     }
-
-    // MARK: - Navigation
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      
-    }
-    */
     
     // MARK: UICollectionViewDataSource
 
@@ -82,7 +60,7 @@ class CollectionVC: UICollectionViewController {
         
         VC.photo = myData[indexPath.row]
         
-        self.navigationController?.pushViewController(VC, animated: true)
+        self.navigationController?.pushViewController(VC, animated: true)//puch to DetailViewController
         
     }
 
@@ -101,38 +79,6 @@ class CollectionVC: UICollectionViewController {
         
         return cell
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
 
 extension CollectionVC: UICollectionViewDelegateFlowLayout {

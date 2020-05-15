@@ -14,21 +14,3 @@ struct Photo : Decodable {
     let url : URL
     let thumbnailUrl : URL
 }
-
-class Cell {
-    var id : String
-    var albumId: String
-    var title : String
-    var thumbnailUrl : String
-    
-    init(id : String, albumID: String, title : String, thumbnailUrl : String){
-        self.id = id
-        self.albumId = albumID
-        self.title = title
-        self.thumbnailUrl = thumbnailUrl
-    }//初始化器
-    
-    convenience init(){
-        self.init(id: "", albumID: "", title: "", thumbnailUrl: "")
-    }
-}

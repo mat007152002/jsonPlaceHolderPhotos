@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class CollectionViewCell: UICollectionViewCell { //客製Cell for CollectionView
     @IBOutlet var ImageView: UIImageView!
     @IBOutlet var idLabel: UILabel!
     @IBOutlet var titleLabel: UILabel!
@@ -29,13 +29,10 @@ class CollectionViewCell: UICollectionViewCell {
     static func nib() -> UINib {
         return UINib(nibName: identifier, bundle: nil)
     }
-    
-    
-
 }
 
 extension UIImageView {
-    func load(url: URL) {
+    func load(url: URL) { //讓UIImageView載入url圖片
         DispatchQueue.global().async { [weak self] in
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data) {

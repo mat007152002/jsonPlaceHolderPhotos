@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CellDetailVC: UIViewController {
+class CellDetailVC: UIViewController { //用來呈現各Cell細節
     @IBOutlet var DetailImageView: UIImageView!
     @IBOutlet var DetailIdLabel: UILabel!
     @IBOutlet var DetailTitleLabel: UILabel!
@@ -23,16 +23,4 @@ class CellDetailVC: UIViewController {
         DetailImageView.load(url: (photo?.url)!)
 
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
