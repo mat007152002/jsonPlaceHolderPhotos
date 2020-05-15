@@ -18,6 +18,8 @@ class CollectionVC: UICollectionViewController {
         Cell(id: "1", albumID: "1", title: "1", thumbnailUrl: "1"),
     ]
     
+    var myData = [Photo]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadList()
@@ -40,8 +42,19 @@ class CollectionVC: UICollectionViewController {
             }
             else{
                 print("發送成功")
-                let str = String(data: data!, encoding: .utf8)
-                print(str ?? "")
+                
+                    do{
+                        self.myData = try JSONDecoder().decode([Photo].self,from: data!)
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                        }
+                    }
+                    catch{
+                        print(error.localizedDescription)
+                    }
+                
+                
+                
                 
             }
             
@@ -49,30 +62,6 @@ class CollectionVC: UICollectionViewController {
         
         task.resume()
         
-        /*let url = "https://jsonplaceholder.typicode.com/photos"
-        AF.request(url).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-
-                for value in json.arrayValue {
-                    let url = value.dictionaryValue["url"]!.stringValue
-                    let albumId = value.dictionaryValue["albumId"]!.stringValue
-                    let thumbnailUrl = value.dictionaryValue["thumbnailUrl"]!.stringValue
-                    let id = value.dictionaryValue["id"]!.stringValue
-                    let title = value.dictionaryValue["title"]!.stringValue
-
-                    // Add this album to array.
-                    let album = AlbumModel(id: id, albumId: albumId, title: title, thumbnailUrl: thumbnailUrl)
-                    albums.append(album)
-
-                }
-            case .failure(let error):
-                print(error)
-            }
-
-        }*/
     }
 
     // MARK: - Navigation
@@ -91,7 +80,8 @@ class CollectionVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let VC = storyboard?.instantiateViewController(identifier: "CellDetailVC") as! CellDetailVC
         
-        VC.cell = cells[indexPath.row]
+        VC.photo = myData[indexPath.row]
+        
         self.navigationController?.pushViewController(VC, animated: true)
         
     }
@@ -99,15 +89,15 @@ class CollectionVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return cells.count
+        return myData.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
             CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-    
-        cell.setCell(image: cells[indexPath.row].thumbnailUrl, id: cells[indexPath.row].id, title: cells[indexPath.row].title)
+        
+        cell.setCell(image: myData[indexPath.row].thumbnailUrl, id: myData[indexPath.row].id, title: myData[indexPath.row].title)
         
         return cell
     }
@@ -161,3 +151,5 @@ extension CollectionVC: UICollectionViewDelegateFlowLayout {
         return 0
     }
 }
+
+

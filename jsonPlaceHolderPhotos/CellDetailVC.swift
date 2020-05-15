@@ -13,15 +13,14 @@ class CellDetailVC: UIViewController {
     @IBOutlet var DetailIdLabel: UILabel!
     @IBOutlet var DetailTitleLabel: UILabel!
     
-    var cell = Cell()
-    
+    var photo:Photo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        DetailIdLabel.text = cell.id
-        DetailTitleLabel.text = cell.title
-        DetailImageView.image = UIImage(named: cell.thumbnailUrl)
+    
+        DetailIdLabel.text = "id: "+"\((photo?.id)!)" /* or use "\(photo?.id ?? 0)"*/
+        DetailTitleLabel.text = "title: "+(photo?.title)!
+        DetailImageView.load(url: (photo?.url)!)
 
     }
     

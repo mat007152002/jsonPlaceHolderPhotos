@@ -8,6 +8,13 @@
 
 import Foundation
 
+struct Photo : Decodable {
+    let id : Int
+    let title : String
+    let url : URL
+    let thumbnailUrl : URL
+}
+
 class Cell {
     var id : String
     var albumId: String

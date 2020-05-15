@@ -20,14 +20,30 @@ class CollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
-    func setCell(image: String, id: String, title: String){
-        ImageView.image = UIImage(named: image)
-        idLabel.text = id
+    func setCell(image: URL, id: Int, title: String){
+        ImageView.load(url: image)
+        idLabel.text = String(id)
         titleLabel.text = title
     }
     
     static func nib() -> UINib {
         return UINib(nibName: identifier, bundle: nil)
     }
+    
+    
 
+}
+
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }
